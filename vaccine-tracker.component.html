@@ -34,4 +34,42 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div
+
+
+
+
+  <div class="container mt-4">
+  <div class="d-flex justify-content-center mb-3 gap-2">
+    <button class="btn btn-primary" (click)="setFilterMode('type')">By Vaccine Type</button>
+    <button class="btn btn-success" (click)="setFilterMode('location')">By Location</button>
+    <button class="btn btn-warning" (click)="setFilterMode('both')">By Both</button>
+  </div>
+
+  <div class="mb-3" *ngIf="filterMode">
+    <input
+      class="form-control"
+      [(ngModel)]="searchText"
+      (input)="applySearch()"
+      [placeholder]="getPlaceholder()"
+    />
+  </div>
+
+  <table class="table table-bordered table-striped text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>Vaccine Type</th>
+        <th>Location</th>
+        <th>Total Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of filteredData">
+        <td>{{ row.type }}</td>
+        <td>{{ row.location }}</td>
+        <td>{{ row.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
