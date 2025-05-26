@@ -55,3 +55,30 @@ export class VaccineTrackerComponent implements OnInit {
     });
   }
 }
+
+filterMode: 'type' | 'location' | 'both' | null = null;
+searchText: string = '';        // For type or location when single input
+searchLocationText: string = ''; // For location when 'both' mode
+filteredData: any[] = [];
+
+setFilterMode(mode: 'type' | 'location' | 'both'): void {
+  this.filterMode = mode;
+  this.searchText = '';
+  this.searchLocationText = '';
+  this.applySearch();
+}
+
+applySearch(): void {
+  const searchType = this.searchText.toLowerCase();
+  const searchLoc = this.searchLocationText.toLowerCase();
+
+  this.filteredData = this.groupedData.filter(item => {
+    const typeMatch = item.type.toLowerCase().includes(searchType);
+    const locationMatch = item.location.toLowerCase().includes(searchLoc);
+
+    if (this.filterMode === 'type') return typeMatch;
+    if (this.filterMode === 'location') return locationMatch;
+    if (this.filterMode === 'both') return typeMatch && locationMatch; // AND for both inputs
+    return true;
+  });
+}
