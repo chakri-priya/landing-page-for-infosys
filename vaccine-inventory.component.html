@@ -1,0 +1,41 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Vaccine Inventory</h2>
+
+  <div class="row justify-content-center mb-3">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by Vaccine Type or Location"
+        [(ngModel)]="searchText"
+      />
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary w-100" (click)="loadVaccineInventory()">
+        Load Inventory
+      </button>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-hover" *ngIf="vaccineData.length">
+    <thead class="thead-dark">
+      <tr>
+        <th>Vaccine Type</th>
+        <th>Location</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vaccine of vaccineData | filterVaccineType: searchText">
+        <td>{{ vaccine.type }}</td>
+        <td>{{ vaccine.location }}</td>
+        <td>{{ vaccine.quantity }}</td>
+      </tr>
+      <tr *ngIf="(vaccineData | filterVaccineType: searchText).length === 0">
+        <td colspan="3" class="text-center text-danger">
+          No matching records found
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
