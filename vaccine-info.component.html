@@ -19,3 +19,51 @@
     </li>
   </ul>
 </div>
+
+
+
+
+<!DOCTYPE html>
+<html>
+    
+<title>Vaccine quantity by Type</title>
+<body>
+   
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Vaccine Inventory</h2>
+  
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-6">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by Vaccine Type  or Location"
+          [(ngModel)]="searchText"
+        />
+      </div>
+   
+    </div>
+  
+    <table class="table table-bordered table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>Vaccine Type</th>
+          <th>Location</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vaccine of vaccineData | filterVaccineType: searchText" >
+          <td>{{ vaccine.type }}</td>
+          <td>{{ vaccine.location }}</td>
+          <td>{{ vaccine.quantity }}</td>
+        </tr>
+        <tr *ngIf="(vaccineData | filterVaccineType: searchText).length === 0">
+          <td colspan="3" class="text-center text-danger">No matching records found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
