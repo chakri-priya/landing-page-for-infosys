@@ -55,3 +55,79 @@
     </tbody>
   </table>
 </div>
+
+<div>
+  <!-- Filter buttons -->
+  <button
+    (click)="setFilterMode('type')"
+    [ngClass]="{'active-btn': filterMode === 'type'}"
+    class="filter-btn"
+  >
+    Type
+  </button>
+
+  <button
+    (click)="setFilterMode('location')"
+    [ngClass]="{'active-btn': filterMode === 'location'}"
+    class="filter-btn"
+  >
+    Location
+  </button>
+
+  <button
+    (click)="setFilterMode('both')"
+    [ngClass]="{'active-btn': filterMode === 'both'}"
+    class="filter-btn"
+  >
+    Both
+  </button>
+
+  <!-- Search inputs -->
+  <div *ngIf="filterMode === 'both'">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (input)="applySearch()"
+      placeholder="Search by vaccine type"
+      class="search-input"
+    />
+    <input
+      type="text"
+      [(ngModel)]="searchLocationText"
+      (input)="applySearch()"
+      placeholder="Search by location"
+      class="search-input"
+    />
+  </div>
+
+  <div *ngIf="filterMode !== 'both'">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (input)="applySearch()"
+      [placeholder]="getPlaceholder()"
+      class="search-input"
+    />
+  </div>
+
+  <!-- Table -->
+  <table class="vaccine-table">
+    <thead>
+      <tr>
+        <th>Vaccine Type</th>
+        <th>Location</th>
+        <th>Available Doses</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of filteredData">
+        <td>{{ item.type }}</td>
+        <td>{{ item.location }}</td>
+        <td>{{ item.availableDoses }}</td>
+      </tr>
+      <tr *ngIf="filteredData.length === 0">
+        <td colspan="3">No data found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
