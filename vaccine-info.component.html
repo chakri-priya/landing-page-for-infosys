@@ -1,0 +1,17 @@
+<button class="btn btn-success" (click)="loadVaccineInfo()">
+  Load Vaccine Types & Locations
+</button>
+
+<div *ngIf="vaccineTypes">
+  <h3>Vaccine Types</h3>
+  <ul>
+    <li *ngFor="let type of vaccineTypes">{{ type.name }}</li>
+  </ul>
+</div>
+
+<div *ngIf="locations">
+  <h3>Vaccination Locations</h3>
+  <ul>
+    <li *ngFor="let loc of locations">{{ loc.name }} - {{ loc.city }}</li>
+  </ul>
+</div>
