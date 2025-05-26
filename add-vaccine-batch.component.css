@@ -1,0 +1,6 @@
+/* Center the form title on smaller screens */
+@media (max-width: 576px) {
+  h2 {
+    text-align: center;
+  }
+}
