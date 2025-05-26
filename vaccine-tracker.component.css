@@ -1,9 +1,52 @@
 
-thead {
-  background-color: #343a40;
+/* Button styles */
+.filter-btn {
+  background-color: #007bff; /* Same color as location button */
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin-right: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: #0056b3;
+}
+
+.active-btn {
+  background-color: #0056b3; /* Darker shade for active button */
+}
+
+/* Search input */
+.search-input {
+  margin-top: 15px;
+  padding: 7px 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Table styles */
+.vaccine-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.vaccine-table th,
+.vaccine-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.vaccine-table th {
+  background-color: #007bff;
   color: white;
 }
 
-input.form-control {
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+.vaccine-table tr:nth-child(even) {
+  background-color: #f9f9f9;
 }

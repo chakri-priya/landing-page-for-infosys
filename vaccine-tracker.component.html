@@ -1,75 +1,57 @@
 
-<div class="container mt-5">
-  <h2 class="text-center mb-4">Vaccine Inventory</h2>
+<div>
+  <!-- Filter buttons -->
+  <button
+    (click)="setFilterMode('type')"
+    [ngClass]="{'active-btn': filterMode === 'type'}"
+    class="filter-btn"
+  >
+    Type
+  </button>
 
-  <div class="row justify-content-center mb-4">
-    <div class="col-md-6">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search by Vaccine Type or Location"
-        [(ngModel)]="searchText"
-      />
-    </div>
-  </div>
+  <button
+    (click)="setFilterMode('location')"
+    [ngClass]="{'active-btn': filterMode === 'location'}"
+    class="filter-btn"
+  >
+    Location
+  </button>
 
-  <table class="table table-bordered table-hover">
-    <thead class="thead-dark">
+  <button
+    (click)="setFilterMode('both')"
+    [ngClass]="{'active-btn': filterMode === 'both'}"
+    class="filter-btn"
+  >
+    Both
+  </button>
+
+  <!-- Search input -->
+  <input
+    type="text"
+    [(ngModel)]="searchText"
+    (input)="applySearch()"
+    [placeholder]="getPlaceholder()"
+    class="search-input"
+  />
+
+  <!-- Table to show filtered data -->
+  <table class="vaccine-table">
+    <thead>
       <tr>
         <th>Vaccine Type</th>
         <th>Location</th>
-        <th>Quantity</th>
+        <th>Available Doses</th>
       </tr>
     </thead>
     <tbody>
-      <tr
-        *ngFor="let vaccine of vaccineData | filterVaccine: searchText"
-      >
-        <td>{{ vaccine.type }}</td>
-        <td>{{ vaccine.location }}</td>
-        <td>{{ vaccine.quantity }}</td>
+      <tr *ngFor="let item of filteredData">
+        <td>{{ item.type }}</td>
+        <td>{{ item.location }}</td>
+        <td>{{ item.availableDoses }}</td>
       </tr>
-      <tr *ngIf="(vaccineData | filterVaccine: searchText).length === 0">
-        <td colspan="3" class="text-center text-danger">No matching records found</td>
+      <tr *ngIf="filteredData.length === 0">
+        <td colspan="3">No data found.</td>
       </tr>
     </tbody>
   </table>
-</div
-
-
-
-
-  <div class="container mt-4">
-  <div class="d-flex justify-content-center mb-3 gap-2">
-    <button class="btn btn-primary" (click)="setFilterMode('type')">By Vaccine Type</button>
-    <button class="btn btn-success" (click)="setFilterMode('location')">By Location</button>
-    <button class="btn btn-warning" (click)="setFilterMode('both')">By Both</button>
-  </div>
-
-  <div class="mb-3" *ngIf="filterMode">
-    <input
-      class="form-control"
-      [(ngModel)]="searchText"
-      (input)="applySearch()"
-      [placeholder]="getPlaceholder()"
-    />
-  </div>
-
-  <table class="table table-bordered table-striped text-center">
-    <thead class="table-dark">
-      <tr>
-        <th>Vaccine Type</th>
-        <th>Location</th>
-        <th>Total Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let row of filteredData">
-        <td>{{ row.type }}</td>
-        <td>{{ row.location }}</td>
-        <td>{{ row.quantity }}</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-
+</div>
