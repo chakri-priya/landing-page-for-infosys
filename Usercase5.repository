@@ -1,0 +1,2 @@
+@Repository
+public interface NotificationPreferenceRepository extends JpaRepository<NotificationPreference, String> {}
