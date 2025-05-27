@@ -1,0 +1,10 @@
+<div class="container mt-5">
+  <h3 class="mb-3 text-center">Book Your Appointment</h3>
+  <form (ngSubmit)="bookAppointment()">
+    <div class="mb-3">
+      <label class="form-label">Select Date & Time</label>
+      <input type="datetime-local" class="form-control" [(ngModel)]="bookingDate" name="bookingDate" required>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Confirm Booking</button>
+  </form>
+</div>
