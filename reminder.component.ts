@@ -1,23 +1,24 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-reminder',
   templateUrl: './reminder.component.html',
   styleUrls: ['./reminder.component.css']
 })
-export class ReminderComponent {
+export class ReminderComponent implements OnInit {
   appointmentDate: string = '';
   message: string = '';
 
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.http.get<any>('http://localhost:3000/appointment').subscribe(data => {
+      this.appointmentDate = data.datetime;
+    });
+  }
+
   scheduleReminder() {
-    if (!this.appointmentDate) {
-      this.message = 'Please select a date and time.';
-      return;
-    }
-
-    const appointmentTime = new Date(this.appointmentDate);
-    const reminderTime = new Date(appointmentTime.getTime() - 24 * 60 * 60 * 1000);
-
-    this.message = `Reminder scheduled for: ${reminderTime.toLocaleString()}`;
+    this.message = `Reminder is scheduled for 24 hours before: ${new Date(this.appointmentDate).toLocaleString()}`;
   }
 }
